@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-
-
 int main(void){
 
 	int choice;
@@ -19,5 +17,34 @@ int main(void){
 	scanf("%d", &choice);
 
 	printf("%d\n", choice);
+
+	switch(choice){
+		case 1:
+			printf("Task added!\n");
+			break;
+		case 2:
+			printf("Task removed\n");
+			break;
+		case 3:
+			printf("List of Tasks\n");
+			break;
+		case 4:
+			printf("Task marked complete\n");
+			break;
+		case 5:
+			printf("Searched for a task\n");
+			break;
+		case 6:
+			printf("Saved!\n");
+			break;
+		case 7:
+			printf("Loaded successfully!\n");
+			break;
+		default:
+			printf("ERROR! ENTER A NUMBER BETWEEN 1-7 ONLY!!!\n");
+
+
+
+}
 	return 0;
 }
