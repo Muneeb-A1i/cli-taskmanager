@@ -1,12 +1,15 @@
 #include <stdio.h>
 
-char create_task(){
-	char task_name[];
+void create_task(){
+	char task_name[30];
 	
+	getchar();
 	printf("Enter Task Name: ");
+	
 	fgets(task_name, sizeof(task_name), stdin);
+	printf("Task Name: %s\n", task_name);
 
-	return task_name;
+	
 }
 
 int main(void){
