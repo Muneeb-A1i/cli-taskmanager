@@ -1,19 +1,33 @@
 #include <stdio.h>
+#include <string.h>
+
+char tasks[0][30] = {};
 
 void create_task(){
 	char task_name[30];
+	//int size = sizeof(task_name);
 	
 	getchar();
 	printf("Enter Task Name: ");
-	
 	fgets(task_name, sizeof(task_name), stdin);
-	printf("Task Name: %s\n", task_name);
-
 	
+	printf("Task Name: %s\n", task_name);
+	//printf("%d", size);
+}
+
+void list_tasks(){
+	printf("%s\n", tasks[0]);
 }
 
 int main(void){
 
+	printf("total bytes:  %d\n", sizeof(tasks));
+	printf("byte of each element:  %d\n", sizeof(tasks[0]));
+	
+	int size = sizeof(tasks) / sizeof(tasks[0]);
+
+	printf("Number of elements in array: %d\n", size);
+/*
 	int choice;
 
 	printf("----- Task Manager -----\n");
@@ -36,7 +50,9 @@ int main(void){
 			
 			break;
 		case 3:
-			
+			for(int i = 0; i < 3; i++){
+			printf("%s\n", tasks[i]);
+}
 			break;
 		case 4:
 			
@@ -57,4 +73,6 @@ int main(void){
 
 }
 	return 0;
+
+*/
 }
