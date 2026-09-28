@@ -27,7 +27,7 @@ What should happen when the user tries to add a task after every task slot is al
 
 task_name holds the user input inside create_task(). How can I save that text in one row of tasks so it is still available after the function ends?
 
-Why does printing task_name work, but that not automatically mean it has been saved in tasks?
+Why does printing task_name work, but does not automatically mean it has been saved in tasks?
 
 When using fgets(), why does the input sometimes contain a newline character, and how should I handle it?
 
