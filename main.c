@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
-char tasks[0][30] = {};
+char tasks[5][30] = {"", "", "", "", ""};
 
 void create_task(){
 	char task_name[30];
@@ -20,13 +21,22 @@ void list_tasks(){
 }
 
 int main(void){
+	
+	int total_size = sizeof(tasks);
+	int single_size = sizeof(tasks[0]);
 
-	printf("total bytes:  %d\n", sizeof(tasks));
-	printf("byte of each element:  %d\n", sizeof(tasks[0]));
+	printf("total bytes:  %d\n", total_size);
+	printf("byte of each element:  %d\n", single_size);
 	
 	int size = sizeof(tasks) / sizeof(tasks[0]);
 
 	printf("Number of elements in array: %d\n", size);
+
+	for(int i = 0; i < size; i++){
+		if(tasks[i][0] == '\0'){
+			printf("Element %d is empty\n", i);
+		}
+	};
 /*
 	int choice;
 
