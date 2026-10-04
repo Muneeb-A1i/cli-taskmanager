@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+bool isTrue = true;
+
 char tasks[5][30] = {"", "", "", "", ""};
 
 void create_task(){
@@ -11,15 +13,32 @@ void create_task(){
 	getchar();
 	printf("Enter Task Name: ");
 	fgets(task_name, sizeof(task_name), stdin);
+
+	printf("Task added!\n");
+
+	printf("\n");
 	
 	int total_size = sizeof(tasks);
 	int single_size = sizeof(tasks[0]);
 	
 	int size = total_size / single_size;
 
-        for(int i = 0; i < size; i++){
-                if(tasks[i][0] == '\0'){
+	bool  append_task = false;
+
+	 for(int i = 0; i < size; i++){
+                if(i >= size){
+			printf("ERROR! Out of bounds!\n");
+			printf("Only %d tasks can be added!\n", size);
+			printf("You tried adding %d\n", i);
+			break;
+		}
+		else if(tasks[i][0] == '\0'){
 			strcpy(tasks[i], task_name);
+			append_task = true;
+			
+			if(append_task == true){
+				break;
+			}
                 }
         };
 }
@@ -30,18 +49,24 @@ void list_tasks(){
 
         int size = total_size / single_size;
 
+	printf("\n");
+	printf("----- To Do -----\n");
+	printf("\n");
+
 	for(int i = 0; i < size; i++){
 		if(tasks[i][0] != '\0'){
 			printf("%s", tasks[i]);
 		}
 		else{
-			printf("element %d is empty", i);
+			printf("empty\n");
 		}
 	};
+
+	printf("\n");
 }
 
 int main(void){
-	while(true){
+	while(isTrue){
 		int choice;
 
 		printf("----- Task Manager -----\n");
@@ -80,14 +105,17 @@ int main(void){
 				
 				break;
 			case 8:
+				isTrue = false;
+				printf("Goodbye!\n");
 				break;
 			default:
-				printf("ERROR! ENTER A NUMBER BETWEEN 1-7 ONLY!!!\n");
+				printf("ERROR! ENTER A NUMBER BETWEEN 1-8 ONLY!!!\n");
 
 
 
 		}
 	}
+	printf("\n");
 	return 0;
 
 }
