@@ -2,45 +2,109 @@
 #include <string.h>
 #include <stdbool.h>
 
-bool isTrue = true;
-
 char tasks[5][30] = {"", "", "", "", ""};
 
 void create_task(){
 	char task_name[30];
-	//int size = sizeof(task_name);
 	
 	getchar();
 	printf("Enter Task Name: ");
 	fgets(task_name, sizeof(task_name), stdin);
-
-	printf("Task added!\n");
-
-	printf("\n");
 	
 	int total_size = sizeof(tasks);
 	int single_size = sizeof(tasks[0]);
 	
 	int size = total_size / single_size;
 
-	bool  append_task = false;
+	bool append_task = false;
 
 	 for(int i = 0; i < size; i++){
-                if(i >= size){
-			printf("ERROR! Out of bounds!\n");
-			printf("Only %d tasks can be added!\n", size);
-			printf("You tried adding %d\n", i);
-			break;
-		}
-		else if(tasks[i][0] == '\0'){
+               if(tasks[i][0] == '\0'){
 			strcpy(tasks[i], task_name);
 			append_task = true;
-			
+
+			printf("Task Added!\n");
+			printf("\n");
+
 			if(append_task == true){
 				break;
 			}
                 }
+		else if (tasks[4][0] != '\0'){
+			printf("ERROR OUT OF BOUNDS!\n");
+			printf("\n");
+			break;
+		}
         };
+}
+
+void remove_task(){
+	bool isTrue = true;
+
+	int choice;
+
+	int total_size = sizeof(tasks);
+	int single_size = sizeof(tasks[0]);
+
+	int size = total_size / single_size;
+
+	int counter = 1;
+
+	printf("\n");
+	printf("----- Your Tasks -----\n");
+	printf("\n");
+
+	for(int i = 0; i < size; i++){
+
+		if(tasks[i][0] != '\0'){
+			printf("%d: %s", counter, tasks[i]);
+			counter++;
+		};
+
+	};
+
+	while(isTrue){
+
+		printf("\n");
+
+		printf("Which task would you like to remove?: ");
+		scanf("%d", &choice);
+
+		switch(choice){
+
+			case 1:
+				strcpy(tasks[0], "");
+				isTrue = false;
+				break;
+
+			case 2:
+				strcpy(tasks[1], "");
+				isTrue = false;
+				break;
+
+			case 3:
+				strcpy(tasks[2], "");
+				isTrue = false;
+				break;
+
+			case 4:
+				strcpy(tasks[3], "");
+				isTrue = false;
+				break;
+
+			case 5:
+				strcpy(tasks[4], "");
+				isTrue = false;
+				break;
+
+			default:
+				printf("ERROR! Enter a number between 1-5 ONLY!!!!\n");
+
+		}
+	}
+
+	printf("Task Removed!\n");
+
 }
 
 void list_tasks(){
@@ -66,6 +130,8 @@ void list_tasks(){
 }
 
 int main(void){
+	bool isTrue = true;
+
 	while(isTrue){
 		int choice;
 
@@ -87,7 +153,7 @@ int main(void){
 				create_task();
 				break;
 			case 2:
-				
+				remove_task();
 				break;
 			case 3:
 				list_tasks();
