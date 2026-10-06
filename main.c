@@ -3,39 +3,61 @@
 #include <stdbool.h>
 
 char tasks[5][30] = {"", "", "", "", ""};
+char status[5][30] = {"", "", "", "", ""};
 
 void create_task(){
+
+	/*
+		psuedo code:
+		1. ask user for task name
+		2. save task name in char varaible
+		3. calclate task array size (how many elements we have)
+		4. go through each element in array to check if it's empty
+		5. if empty, put task name in that element, then stop. else, move to next element and check
+		6. check if all elements are full, if true then prevent user from adding more
+		7. if one is empty, allow task to be added in that element.
+	*/
+
 	char task_name[30];
-	
+	bool append_task = true;
+	bool isFull = false;
+
 	getchar();
 	printf("Enter Task Name: ");
 	fgets(task_name, sizeof(task_name), stdin);
-	
+
 	int total_size = sizeof(tasks);
 	int single_size = sizeof(tasks[0]);
-	
+
 	int size = total_size / single_size;
 
-	bool append_task = false;
+	if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks [4][0] != '\0'){
+		isFull = true;
+	}
 
-	 for(int i = 0; i < size; i++){
-               if(tasks[i][0] == '\0'){
-			strcpy(tasks[i], task_name);
-			append_task = true;
+	if(isFull == false){
 
-			printf("Task Added!\n");
-			printf("\n");
+	 	for(int i = 0; i < size; i++){
+               		if(tasks[i][0] == '\0'){
+				strcpy(tasks[i], task_name);
+				strcpy(status[i], "Not started");
+				append_task = true;
 
-			if(append_task == true){
-				break;
-			}
-                }
-		else if (tasks[4][0] != '\0'){
-			printf("ERROR OUT OF BOUNDS!\n");
-			printf("\n");
-			break;
-		}
-        };
+				printf("Task Added!\n");
+				printf("\n");
+
+				if(append_task == true){
+					break;
+				}
+                	}
+
+        	};
+	}else{
+
+		printf("Table Full!\n");
+		printf("\n");
+
+	}
 }
 
 void remove_task(){
@@ -48,17 +70,16 @@ void remove_task(){
 
 	int size = total_size / single_size;
 
-	int counter = 1;
-
 	printf("\n");
 	printf("----- Your Tasks -----\n");
 	printf("\n");
 
 	for(int i = 0; i < size; i++){
 
+		int counter = i+1;
+
 		if(tasks[i][0] != '\0'){
 			printf("%d: %s", counter, tasks[i]);
-			counter++;
 		};
 
 	};
@@ -108,6 +129,7 @@ void remove_task(){
 }
 
 void list_tasks(){
+
 	int total_size = sizeof(tasks);
         int single_size = sizeof(tasks[0]);
 
@@ -119,7 +141,7 @@ void list_tasks(){
 
 	for(int i = 0; i < size; i++){
 		if(tasks[i][0] != '\0'){
-			printf("%s", tasks[i]);
+			printf("%s: %s\n", tasks[i], status[i]);
 		}
 		else{
 			printf("empty\n");
@@ -128,6 +150,76 @@ void list_tasks(){
 
 	printf("\n");
 }
+
+void mark_complete(){
+
+	bool isTrue = true;
+
+	int choice;
+
+	int total_size = sizeof(tasks);
+	int single_size = sizeof(tasks[0]);
+
+	int size = total_size / single_size;
+
+	printf("\n");
+	printf("----- Your Tasks -----\n");
+	printf("\n");
+
+	for(int i = 0; i < size; i++){
+
+		int counter = i+1;
+
+		if(tasks[i][0] != '\0'){
+			printf("%d: %s", counter, tasks[i]);
+		};
+
+	};
+
+	while(isTrue){
+
+		printf("\n");
+
+		printf("Which task would you like to mark complete?: ");
+		scanf("%d", &choice);
+
+		switch(choice){
+
+			case 1:
+				strcpy(status[0], "Complete");
+				isTrue = false;
+				break;
+
+			case 2:
+				strcpy(status[1], "Complete");
+				isTrue = false;
+				break;
+
+			case 3:
+				strcpy(status[2], "Complete");
+				isTrue = false;
+				break;
+
+			case 4:
+				strcpy(status[3], "Complete");
+				isTrue = false;
+				break;
+
+			case 5:
+				strcpy(status[4], "Complete");
+				isTrue = false;
+				break;
+
+			default:
+				printf("ERROR! Enter a number between 1-5 ONLY!!!!\n");
+
+		}
+	}
+
+	printf("Task marked complete!\n");
+
+}
+
 
 int main(void){
 	bool isTrue = true;
@@ -159,16 +251,16 @@ int main(void){
 				list_tasks();
 				break;
 			case 4:
-				
+				mark_complete();
 				break;
 			case 5:
-				
+
 				break;
 			case 6:
-				
+
 				break;
 			case 7:
-				
+
 				break;
 			case 8:
 				isTrue = false;
