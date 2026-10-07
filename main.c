@@ -70,61 +70,69 @@ void remove_task(){
 
 	int size = total_size / single_size;
 
-	printf("\n");
-	printf("----- Your Tasks -----\n");
-	printf("\n");
+	if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks [4][0] == '\0'){
+		printf("\n");
+		printf("No tasks to remove!\n");
+		printf("\n");
+	}else{
 
-	for(int i = 0; i < size; i++){
+		printf("\n");
+		printf("----- Your Tasks -----\n");
 
-		int counter = i+1;
+		for(int i = 0; i < size; i++){
 
-		if(tasks[i][0] != '\0'){
-			printf("%d: %s", counter, tasks[i]);
+			int counter = i+1;
+
+			if(tasks[i][0] != '\0'){
+				printf("%d: %s", counter, tasks[i]);
+			};
+
 		};
+
+		while(isTrue){
+
+			printf("\n");
+
+			printf("Which task would you like to remove?: ");
+			scanf("%d", &choice);
+
+			switch(choice){
+
+				case 1:
+					strcpy(tasks[0], "");
+					isTrue = false;
+					break;
+
+				case 2:
+					strcpy(tasks[1], "");
+					isTrue = false;
+					break;
+
+				case 3:
+					strcpy(tasks[2], "");
+					isTrue = false;
+					break;
+
+				case 4:
+					strcpy(tasks[3], "");
+					isTrue = false;
+					break;
+
+				case 5:
+					strcpy(tasks[4], "");
+					isTrue = false;
+					break;
+
+				default:
+					printf("ERROR! Enter a number between 1-5 ONLY!!!!\n");
+
+			}
+		}
 
 	};
 
-	while(isTrue){
-
-		printf("\n");
-
-		printf("Which task would you like to remove?: ");
-		scanf("%d", &choice);
-
-		switch(choice){
-
-			case 1:
-				strcpy(tasks[0], "");
-				isTrue = false;
-				break;
-
-			case 2:
-				strcpy(tasks[1], "");
-				isTrue = false;
-				break;
-
-			case 3:
-				strcpy(tasks[2], "");
-				isTrue = false;
-				break;
-
-			case 4:
-				strcpy(tasks[3], "");
-				isTrue = false;
-				break;
-
-			case 5:
-				strcpy(tasks[4], "");
-				isTrue = false;
-				break;
-
-			default:
-				printf("ERROR! Enter a number between 1-5 ONLY!!!!\n");
-
-		}
-	}
-
 	printf("Task Removed!\n");
+	printf("\n");
 
 }
 
@@ -221,6 +229,36 @@ void mark_complete(){
 }
 
 
+void save_file(){
+
+	int total_size = sizeof(tasks);
+	int single_size = sizeof(tasks[0]);
+
+	int size = total_size / single_size;
+
+
+	FILE *pFile = fopen("Tasks.txt", "w");
+
+	if(pFile == NULL){
+		printf("ERROR! cant open file\n");
+	}
+
+	fprintf(pFile, "----- Your Tasks -----\n");
+	fprintf(pFile, "\n");
+
+	for(int i = 0; i < size; i++){
+		fprintf(pFile, "%s: %s\n", tasks[i], status[i]);
+	}
+
+	printf("\n");
+	printf("File saved successfully!!!\n");
+	printf("\n");
+
+	fclose(pFile);
+
+}
+
+
 int main(void){
 	bool isTrue = true;
 
@@ -257,7 +295,7 @@ int main(void){
 
 				break;
 			case 6:
-
+				save_file();
 				break;
 			case 7:
 
