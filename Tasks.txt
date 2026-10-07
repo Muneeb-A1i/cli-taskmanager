@@ -1,0 +1,12 @@
+----- Your Tasks -----
+
+chores
+: Not started
+homework
+: Not started
+go outside
+: Not started
+fight
+: Not started
+win
+: Not started
