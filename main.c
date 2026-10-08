@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 char tasks[5][30] = {"", "", "", "", ""};
-char status[5][30] = {"", "", "", "", ""};
+// char status[5][30] = {"", "", "", "", ""};
 
 void create_task(){
 
@@ -40,7 +40,7 @@ void create_task(){
 	 	for(int i = 0; i < size; i++){
                		if(tasks[i][0] == '\0'){
 				strcpy(tasks[i], task_name);
-				strcpy(status[i], "Not started");
+				//strcpy(status[i], "Not started");
 				append_task = true;
 
 				printf("Task Added!\n");
@@ -149,7 +149,7 @@ void list_tasks(){
 
 	for(int i = 0; i < size; i++){
 		if(tasks[i][0] != '\0'){
-			printf("%s: %s\n", tasks[i], status[i]);
+			printf("%s\n", tasks[i]);
 		}
 		else{
 			printf("empty\n");
@@ -158,7 +158,7 @@ void list_tasks(){
 
 	printf("\n");
 }
-
+/*
 void mark_complete(){
 
 	bool isTrue = true;
@@ -227,7 +227,7 @@ void mark_complete(){
 	printf("Task marked complete!\n");
 
 }
-
+*/
 
 void save_file(){
 
@@ -247,12 +247,41 @@ void save_file(){
 	fprintf(pFile, "\n");
 
 	for(int i = 0; i < size; i++){
-		fprintf(pFile, "%s: %s\n", tasks[i], status[i]);
+		fprintf(pFile, "%s\n", tasks[i]);
 	}
 
 	printf("\n");
 	printf("File saved successfully!!!\n");
 	printf("\n");
+
+	fclose(pFile);
+
+}
+
+
+void load_file(){
+
+	int total_size = sizeof(tasks);
+	int single_size = sizeof(tasks[0]);
+
+	int size = total_size / single_size;
+
+	FILE *pFile = fopen("Tasks.txt", "r");
+	char buffer[1024] = {0};
+
+	if(pFile == NULL){
+		printf("Can't open file!");
+	}
+
+	while(fgets(buffer, sizeof(buffer), pFile) != NULL){
+
+		for(int i = 0; i < size; i++){
+
+			strcpy(tasks[i], buffer);
+
+		}
+
+	}
 
 	fclose(pFile);
 
@@ -289,7 +318,7 @@ int main(void){
 				list_tasks();
 				break;
 			case 4:
-				mark_complete();
+				//mark_complete();
 				break;
 			case 5:
 
@@ -298,7 +327,7 @@ int main(void){
 				save_file();
 				break;
 			case 7:
-
+				load_file();
 				break;
 			case 8:
 				isTrue = false;
