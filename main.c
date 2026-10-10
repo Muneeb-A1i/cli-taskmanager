@@ -5,6 +5,7 @@
 char tasks[5][30] = {"", "", "", "", ""};
 // char status[5][30] = {"", "", "", "", ""};
 
+
 void create_task(){
 
 	/*
@@ -22,14 +23,15 @@ void create_task(){
 	bool append_task = true;
 	bool isFull = false;
 
-	getchar();
-	printf("Enter Task Name: ");
-	fgets(task_name, sizeof(task_name), stdin);
-
 	int total_size = sizeof(tasks);
 	int single_size = sizeof(tasks[0]);
 
 	int size = total_size / single_size;
+
+	getchar();
+	printf("Enter Task Name: ");
+	fgets(task_name, sizeof(task_name), stdin);
+
 
 	if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks [4][0] != '\0'){
 		isFull = true;
@@ -63,14 +65,14 @@ void create_task(){
 void remove_task(){
 	bool isTrue = true;
 
-	int choice;
-
 	int total_size = sizeof(tasks);
 	int single_size = sizeof(tasks[0]);
 
 	int size = total_size / single_size;
 
-	if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks [4][0] == '\0'){
+	int choice;
+
+	if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks[4][0] == '\0'){
 		printf("\n");
 		printf("No tasks to remove!\n");
 		printf("\n");
@@ -139,9 +141,10 @@ void remove_task(){
 void list_tasks(){
 
 	int total_size = sizeof(tasks);
-        int single_size = sizeof(tasks[0]);
+	int single_size = sizeof(tasks[0]);
 
-        int size = total_size / single_size;
+	int size = total_size / single_size;
+
 
 	printf("\n");
 	printf("----- To Do -----\n");
@@ -158,6 +161,7 @@ void list_tasks(){
 
 	printf("\n");
 }
+
 /*
 void mark_complete(){
 
@@ -229,13 +233,40 @@ void mark_complete(){
 }
 */
 
-void save_file(){
+void search_task(){
+
+	char choice[30] = "";
+	char *pChoice = &choice;
+
 
 	int total_size = sizeof(tasks);
 	int single_size = sizeof(tasks[0]);
 
 	int size = total_size / single_size;
 
+	printf("Enter the name of the task you want to search for:");
+	fgets(choice, sizeof(choice), stdin);
+
+	for (int i = 0; i < size; i++)
+	{
+		if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks[4][0] != *pChoice){
+			printf("%s may not exist", *pChoice);
+		} else{
+			printf("\n");
+			printf("Task exists at index %d in tasks array\n", i);
+			printf("\n");
+		}
+	}
+	
+
+}
+
+void save_file(){
+
+	int total_size = sizeof(tasks);
+	int single_size = sizeof(tasks[0]);
+
+	int size = total_size / single_size;
 
 	FILE *pFile = fopen("Tasks.txt", "w");
 
@@ -318,10 +349,11 @@ int main(void){
 				list_tasks();
 				break;
 			case 4:
+				printf("Work in Progress\n");
 				//mark_complete();
 				break;
 			case 5:
-
+				search_task();
 				break;
 			case 6:
 				save_file();
