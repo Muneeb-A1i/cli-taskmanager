@@ -2,22 +2,11 @@
 #include <string.h>
 #include <stdbool.h>
 
-char tasks[5][30] = {"", "", "", "", ""};
+char tasks[5][30] = {""};
 // char status[5][30] = {"", "", "", "", ""};
 
 
 void create_task(){
-
-	/*
-		psuedo code:
-		1. ask user for task name
-		2. save task name in char varaible
-		3. calclate task array size (how many elements we have)
-		4. go through each element in array to check if it's empty
-		5. if empty, put task name in that element, then stop. else, move to next element and check
-		6. check if all elements are full, if true then prevent user from adding more
-		7. if one is empty, allow task to be added in that element.
-	*/
 
 	char task_name[30];
 	bool append_task = true;
@@ -235,8 +224,7 @@ void mark_complete(){
 
 void search_task(){
 
-	char choice[30] = "";
-	char *pChoice = &choice;
+	char choice[30];
 
 
 	int total_size = sizeof(tasks);
@@ -244,20 +232,25 @@ void search_task(){
 
 	int size = total_size / single_size;
 
-	printf("Enter the name of the task you want to search for:");
+
+	getchar();
+	printf("Enter the name of the task you want to search for: ");
 	fgets(choice, sizeof(choice), stdin);
 
-	for (int i = 0; i < size; i++)
-	{
-		if(tasks[0][0] && tasks[1][0] && tasks[2][0] && tasks[3][0] && tasks[4][0] != *pChoice){
-			printf("%s may not exist", *pChoice);
-		} else{
-			printf("\n");
-			printf("Task exists at index %d in tasks array\n", i);
-			printf("\n");
+	for(int i = 0; i < size; i++){
+		print("%s\n", )
+
+		if(choice == task[i]){
+
+			printf("Task found\n");
+
+		}else{
+
+			continue;
+
 		}
+
 	}
-	
 
 }
 
