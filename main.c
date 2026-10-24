@@ -224,7 +224,7 @@ void mark_complete(){
 
 void search_task(){
 
-	char choice[30] = "fight";
+	char choice[30];
 
 
 	int total_size = sizeof(tasks);
@@ -233,21 +233,19 @@ void search_task(){
 	int size = total_size / single_size;
 
 
-	/*getchar();
+	getchar();
 	printf("Enter the name of the task you want to search for: ");
-	fgets(choice, sizeof(choice), stdin);*/
+	fgets(choice, sizeof(choice), stdin);
 
 	for(int i = 0; i < size; i++){
 
-		printf("%d\n", i);
-		printf("%s\n", choice);
-		printf("%s\n", tasks[i]);
 
-		if(choice == tasks[i]){
-			printf("found");
+		if(strcmp(choice, tasks[i]) == 0){
+			printf("found\n");
+			printf("task is at index %d\n", i);
 		}else
 		{
-			printf("not found");
+			continue;
 		}
 		
 
