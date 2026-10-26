@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 char tasks[5][30] = {""};
-// char status[5][30] = {"", "", "", "", ""};
+char status[5][30] = {""};
 
 
 void create_task(){
@@ -31,11 +31,10 @@ void create_task(){
 	 	for(int i = 0; i < size; i++){
                		if(tasks[i][0] == '\0'){
 				strcpy(tasks[i], task_name);
-				//strcpy(status[i], "Not started");
+				strcpy(status[i], "Not started");
 				append_task = true;
 
 				printf("Task Added!\n");
-				printf("\n");
 
 				if(append_task == true){
 					break;
@@ -139,19 +138,23 @@ void list_tasks(){
 	printf("----- To Do -----\n");
 	printf("\n");
 
+	int num = 1;
+
 	for(int i = 0; i < size; i++){
 		if(tasks[i][0] != '\0'){
-			printf("%s\n", tasks[i]);
+			printf("%d: %s - %s\n", num, tasks[i], status[i]);
 		}
 		else{
 			printf("empty\n");
 		}
+
+		num++;
 	};
 
 	printf("\n");
+
 }
 
-/*
 void mark_complete(){
 
 	bool isTrue = true;
@@ -220,7 +223,7 @@ void mark_complete(){
 	printf("Task marked complete!\n");
 
 }
-*/
+
 
 void search_task(){
 
@@ -236,9 +239,14 @@ void search_task(){
 	getchar();
 	printf("Enter the name of the task you want to search for: ");
 	fgets(choice, sizeof(choice), stdin);
+	
+
+	if(strcmp(choice, tasks[0]) != 0 && strcmp(choice, tasks[1]) != 0 && strcmp(choice, tasks[2]) != 0 && 
+	strcmp(choice, tasks[3]) != 0 && strcmp(choice, tasks[4]) != 0 ){
+		printf("Task may not exist\n");
+	}
 
 	for(int i = 0; i < size; i++){
-
 
 		if(strcmp(choice, tasks[i]) == 0){
 			printf("found\n");
